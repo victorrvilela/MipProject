@@ -1,0 +1,300 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Changa+One&display=swap');
+
+*{
+    margin: 0;
+    padding:0;
+    outline:0;
+    box-sizing: border-box;
+}
+
+body{
+    font: 400 14px;
+    font-family: 'Roboto', cursive, sans-serif;
+    background: #f0f0f5;
+    -webkit-font-smoothing: antialiased;
+}
+
+input, button, textarea {
+    font: 400 16px;
+    font-family: 'Roboto', cursive, sans-serif;
+}
+.select{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.select-div{
+    width: 50%;
+    margin-top: 20px;
+}
+
+label{
+    margin-top: 20px;
+}
+
+
+button{
+    cursor: pointer;
+    
+}
+.imput{
+    margin-top: 10px;
+    height: 30px;
+}
+
+.Cabeçalho{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FA8415;
+    width: 100%;   
+}
+
+.Texto-cabeçalho{
+    width: 100%;
+    height: 100%;
+    margin-right: 30px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    justify-content: top;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 50px;
+    color: #000000;
+}
+
+.Logo{
+    width: 60%;
+    height: 10%;
+    margin-right: 30px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 15px;
+    color: #000000;
+    flex-direction: column-reverse;
+    
+}
+
+.cards-new{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form .new{
+    display: flex;
+    width: 100%;
+    max-width: 1100px;
+    margin-right: 30px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.campos{
+    display: flex;
+    flex-direction: column;
+    margin:10px;
+    width: 100%;
+}
+
+.form{
+    width: 90%;
+    margin: 0;
+}
+
+.Logo img{
+    width: 30%;
+    height: 30%;
+    margin: 40px;
+    border-radius: 20px;
+    border:0;
+}
+
+.Corpo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #faad64;
+    width: 100%;
+    margin: 10px;
+}
+
+.Topo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 95%;    
+}
+.Wellcome{
+    width: 90%;
+}
+.cards{
+    width: 95%;
+}
+
+
+
+.button{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: 0;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    line-height: 60px;
+}
+.card-title{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: 0;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    line-height: 60px;
+    background-color: #FA8415;
+}
+
+.button-card:hover{
+    opacity: 60%;
+}
+
+.button-logout{
+    margin: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border:1px solid black;
+    border-radius: 40px;
+    background-color: #FA8415;
+    
+}
+.actions:not(:first-child){
+    margin-top: 50px;
+}
+.button-logout:hover{
+    opacity: 60%;
+}
+
+
+.button svg{
+    margin-top: 10px;
+    font-size: 10px;
+}
+.button svg text{
+    
+    font-size: 10px;
+}
+
+.logout{
+    display: flex;
+    width: 50%;
+      
+    margin-right: 5px;   
+}
+
+.Titulo{ 
+    width: 100%;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.Meio{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    flex-direction: column;
+    width: 100%;   
+    vertical-align: top;
+}
+
+.Crud{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #faad64;
+    width: 100%;   
+    margin: 20px;
+    border-radius: 10px;
+    vertical-align: top;
+}
+
+.actions{
+    width: 100%;
+    display: flex;
+    margin-top: 5px;
+}
+
+
+text.gerenciar{
+    font-size: 14px;
+}
+
+text.card-title{
+    font-size: 22px;
+}
+
+.list{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 24px;
+}
+
+li{
+    padding: 24px;
+    border-radius: 8px;
+    position: relative;
+    list-style: none;
+    background:  #FA8415; 
+}
+
+li:first-child{
+    margin-top:5px;
+}
+
+.button-card{
+    border: 0;
+    background: #faad64;    
+    
+}
+
+.button-section{
+    display: flex;
+    flex-direction: column-reverse;
+    position: absolute;
+    right: 24px;
+    top: 24px;
+}
+
+textarea{
+    min-height: 100px;
+    line-height: 24px;
+    resize: vertical;
+}
