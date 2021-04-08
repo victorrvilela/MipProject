@@ -81,7 +81,8 @@ export default function Adm(){
                         handeleListAdm();
                         
                     }catch (err){
-                        alert('erro no cadastro, tente novamente!')
+                        const erro = err.response.data
+                        alert(err.message)
                     }
                 }
             }

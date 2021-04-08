@@ -23,7 +23,6 @@ module.exports = {
         if(leader){
             return response.json(leader);
         }
-
         return response.status(400)
         .json({erro :'email ou senha incorretos'})
     }
