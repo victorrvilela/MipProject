@@ -10,8 +10,10 @@ module.exports = {
       },
 
     async create(request, response){
-        const {area, cod, description} = request.body;
-       
+        const area= request.body.area2;
+        const cod = request.body.cod2;
+        const description = request.body.description2;
+       try{
         const [id] = await connection('activities').insert({
             area,
             cod,
@@ -19,6 +21,9 @@ module.exports = {
         });
 
         return response.json({ id });
+    }catch{
+        return response.status(400).json({error: 'Erro ao atualizar atividade'})
+    }   
     },
 
     async update (request, response){
@@ -27,13 +32,16 @@ module.exports = {
         const cod  = request.body.cod2;
         const description = request.body.description2;
 
+        try{           
         await connection('activities').where('id', id).update({
             area,
             cod,
             description,
         });
-
-        return response.json({sucess:'Atividade atualizada com sucesso'});
+            return response.json({sucess: 'Atividade atualizada com sucesso'});        
+        }catch{
+        return response.status(400).json({error: 'Falha ao atualizar '})
+        }                         
     },
     
     async delete(request, response){

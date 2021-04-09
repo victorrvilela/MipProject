@@ -102,8 +102,8 @@ module.exports = {
             hr_15_ativ,
             } = request.body;
         const name_leader = request.headers.authorization;
-
-        const [id] = await connection('rdcs_response').insert({
+        try{
+            const [id] = await connection('rdcs_response').insert({
             area,
             cod,
             obra,
@@ -196,8 +196,11 @@ module.exports = {
             hr_15_ativ,
         });
 
-        return response.json({id});
-    },
+            return response.json({id});
+    }catch{
+        return response.status(400).json({error: 'Erro ao cadastrar RDC'})
+    }
+},
 
     async delete(request, response){
         const {id} = request.params;
