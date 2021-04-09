@@ -9,6 +9,12 @@ import MIPlogo from '../../assets/logoMIP.png'
 export default function Atividade(){
     const AdmName = localStorage.getItem('AdmName');
     
+
+
+
+
+
+    
     return(      
       <div className="Atividade-container">
           <section className="Cabeçalho">
