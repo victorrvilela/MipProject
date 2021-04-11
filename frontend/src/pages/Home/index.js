@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaWrench } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link , useHistory} from 'react-router-dom';
 
 
 import './styles.css';
@@ -10,6 +10,11 @@ import MIPlogo from '../../assets/logoMIP.png'
 
 export default function Casa(){
     const AdmName = localStorage.getItem('AdmName');
+    const history = useHistory();
+    async function singout(){
+        localStorage.setItem('AdmName', '');
+        history.push('/')
+    }
     
     return(
       <div className="Home-container">
@@ -30,7 +35,7 @@ export default function Casa(){
                         <h1>Bem vindo(a), {AdmName}</h1>
                     </section>
                     <section className="Logout">
-                        <Link to="/"  className="button-logout" > <FiLogOut size={25}/>Sair</Link>
+                        <button onClick={singout}  className="button-logout" > <FiLogOut size={25}/>Sair</button>
                     </section>
             </section>
             <section className ="MeioHome">

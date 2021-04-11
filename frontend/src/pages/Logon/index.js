@@ -15,12 +15,12 @@ export default function Logon(){
         e.preventDefault();
         try {
             const response = await api.post('login', { email, password });
-            if(response.data.name!=''){
-                localStorage.setItem('AdmId', response.data.id)
+            if(response){                
                 localStorage.setItem('AdmName', response.data.name )
+                history.push('/Home')
+            }else{
+                alert('erro ao logar');
             }
-            history.push('/Home')
-
         }catch(err){
             alert('erro ao logar');
         }

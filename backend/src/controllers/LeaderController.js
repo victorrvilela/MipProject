@@ -12,24 +12,27 @@ module.exports = {
     async create (request, response){
         const {name, password, email, phone} = request.body;
         const name_adm = request.headers.authorization;
+        try
+        {  const teste = await connection('leaders')
+          .where('email', email)
+          .first()
 
-        const teste = await connection('leaders')
-        .where('email', email)
-        .first()
+          if(!teste){
+              const [id] = await connection('leaders').insert({
+                  name,
+                  password,
+                  email,
+                  phone,
+                  name_adm,
+              });
 
-        if(!teste){
-            const [id] = await connection('leaders').insert({
-                name,
-                password,
-                email,
-                phone,
-                name_adm,
-            });
-
-            return response.json({id});
-        }
-        else{
-            return response.status(400).json({error: 'Email já cadastrado'})
+              return response.json({id});
+          }
+          else{
+              return response.status(400).json({error: 'Email já cadastrado'})
+            }
+          }catch{
+            return response.status(400).json({error: 'Erro no cadastro'})
           }
     },
 

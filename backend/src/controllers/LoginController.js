@@ -9,7 +9,13 @@ module.exports = {
             .where('password', password)
             .select('name')
             .first();            
-            return response.json(adm);
+            if(adm){
+                return response.json(adm);
+            }
+            else{
+                return response.status(400)
+            .json({erro :'email ou senha incorretos'})
+            }
                 
         }catch{
             return response.status(400)

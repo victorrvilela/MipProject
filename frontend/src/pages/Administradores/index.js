@@ -8,6 +8,8 @@ import api from '../../services/api';
 import MIPlogo from '../../assets/logoMIP.png'
 
 export default function Adm(){
+
+    const AdmName = localStorage.getItem('AdmName');
    
     const history = useHistory();
     const [name, setName] = useState('');
@@ -32,31 +34,29 @@ export default function Adm(){
        
         try {
             await api.post('adms', data);
-            handeleListAdm();
+            handeleList();
             
         }catch (err){
             alert('erro no cadastro, tente novamente!')
         }
     }
-    const AdmName = localStorage.getItem('AdmName');
-
+    
     const[Adms, SetAdms] = useState([]);
 
    
 
-    function handeleListAdm(){
+    function handeleList(){
         api.get('adms').then(response => {
             SetAdms(response.data);
-            console.log(updateId);
         })
     };
 
-    async function handleDeleteAdm(id){
+    async function handleDelete(id){
         if(window.confirm(`Tem certeza que deseja deletar o adm de id ${id}?`))
         {
             try{
                 await api.delete(`adms/${id}`);
-                handeleListAdm();       
+                handeleList();       
             }catch(err){
                 alert('Erro ao deletar Administrador');
             }
@@ -64,7 +64,7 @@ export default function Adm(){
 
     }
     
-    async function handleUpdateAdm(e){  
+    async function handleUpdate(e){  
         if(updateId!==''){
             if(name2!==''&&password2!==''&&email2!==''&&phone2!==''){
                 if(window.confirm(`Tem certeza que deseja atualizar o adm de ID: ${updateId}`)){
@@ -78,7 +78,7 @@ export default function Adm(){
                     try{
                         await api.put(`adms/${updateId}`, data2);
                         alert('Administrador atualizado com sucesso!')
-                        handeleListAdm();
+                        handeleList();
                         
                     }catch (err){
                         const erro = err.response.data
@@ -132,7 +132,7 @@ export default function Adm(){
              <div className="Meio">
                 <div className="Crud">
                     <section className="actions">
-                         <button onClick={handeleListAdm} className="card-title"> <FiList size={25}/>Lista de Administradores </button>
+                         <button onClick={handeleList} className="card-title"> <FiList size={25}/>Lista de Administradores </button>
                     </section>
                     <section className="cards">
                         <ul className="list">
@@ -147,7 +147,7 @@ export default function Adm(){
                                 <strong>Telefone: </strong>
                                 <text>{adm.phone}    </text>
                                 <section className="button-section">
-                                    <button onClick={()=>handleDeleteAdm(adm.id)} className="button-card" type="submit"> <FiTrash2 size={25} color="red"/></button>
+                                    <button onClick={()=>handleDelete(adm.id)} className="button-card" type="submit"> <FiTrash2 size={25} color="red"/></button>
                                     <button onClick={()=>setId(adm.id)} className="button-card" type="submit"> <FiEdit size={25} color="green"/></button>
                                 </section>
                             </li>
@@ -199,7 +199,7 @@ export default function Adm(){
                     </section>
                     <section className="cards-new">
                         <section className="form">
-                            <form className="new" name="form-edit">
+                            <form className="new">
                                     <section className="campos">
                                         <input 
                                             className="imput" 
@@ -229,7 +229,7 @@ export default function Adm(){
                                                                          
                                     </section>
                                     <section>
-                                        <submit onClick={handleUpdateAdm} className="button-card" > <FiEdit size={25} color="green"/>Id:{updateId}</submit>    
+                                        <submit onClick={handleUpdate} className="button-card" > <FiEdit size={25} color="green"/>Id:{updateId}</submit>    
                                     </section>  
                             </form>
                         </section>
