@@ -12,11 +12,11 @@ export default function Funcionario(){
 
     const history = useHistory();
     const [name, setName] = useState('');
-    const [name_leader, setName_leader] = useState('');
-    const [name_leader2, setName_leader2] = useState('');
+    const [name_leader, setName_leader] = useState('');    
     const [cod, setCod] = useState('');
     const [occupation, setOcuppacion] = useState('');
     const [name2, setName2] = useState('');
+    const [name_leader2, setName_leader2] = useState('');
     const [cod2, setCod2] = useState('');
     const [occupation2, setOcuppacion2] = useState('');
     const [updateId, setId] = useState('');
@@ -229,7 +229,7 @@ export default function Funcionario(){
                                     </label>                                                                                                              
                                 </section>
                                 <section >
-                                <submit onClick={handleUpdate} className="button-card" > <FiEdit size={25} color="green"/>Id:{updateId}</submit>    
+                                 <submit onClick={handleUpdate} className="button-card" > <FiEdit size={25} color="green"/>Id:{updateId}</submit>    
                                 </section> 
                             </form>
                         </section>                                  

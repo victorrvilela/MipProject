@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaWrench } from 'react-icons/fa';
+import { FaList, FaWrench } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
 import { Link , useHistory} from 'react-router-dom';
 
@@ -38,21 +38,28 @@ export default function Casa(){
                         <button onClick={singout}  className="button-logout" > <FiLogOut size={25}/>Sair</button>
                     </section>
             </section>
-            <section className ="MeioHome">
-                <section className="Colunas">
-                    <Link to="/Lideres"  className="button" > <FaWrench size={20}/> <text className="gerenciar">Gerenciar Líderes</text></Link>
+            <section className ="linhas">
+                <section className ="MeioHome">
+                    <section className="Colunas">
+                        <Link to="/Lideres"  className="button" > <FaWrench size={20}/> <text className="gerenciar">Gerenciar Líderes</text></Link>
+                    </section>
+                    <section className="Colunas">
+                        <Link to="/Funcionarios"  className="button" > <FaWrench size={20}/> <text className="gerenciar">Gerenciar Funcionários</text></Link>
+                    </section>
+                    <section className="Colunas">
+                        <Link to="/Atividades"  className="button" > <FaWrench size={20}/><text className="gerenciar"> Gerenciar Atividades</text></Link>
+                    </section>
                 </section>
-                <section className="Colunas">
-                    <Link to="/Funcionarios"  className="button" > <FaWrench size={20}/> <text className="gerenciar">Gerenciar Funcionários</text></Link>
-                </section>
-                <section className="Colunas">
-                    <Link to="/Atividades"  className="button" > <FaWrench size={20}/><text className="gerenciar"> Gerenciar Atividades</text></Link>
-                </section>
-                <section className="Colunas">
-                    <Link to="/RDCs"  className="button" > <FaWrench size={20}/><text className="gerenciar">Gerenciar RDCs</text></Link>
-                </section>
-                <section className="Colunas">
-                    <Link to="/Administradores"  className="button" > <FaWrench size={20}/><text className="gerenciar">Gerenciar Administradores</text></Link>
+                <section className ="MeioHome">
+                    <section className="Colunas">
+                        <Link to="/RDCs"  className="button" > <FaWrench size={20}/><text className="gerenciar">Gerenciar RDCs</text></Link>
+                    </section>
+                    <section className="Colunas">
+                        <Link to="/Administradores"  className="button" > <FaWrench size={20}/><text className="gerenciar">Gerenciar Administradores</text></Link>
+                    </section>
+                    <section className="Colunas">
+                        <Link to="/list"  className="button" > <FaList size={20}/><text className="gerenciar">Listagem de funcionários</text></Link>
+                    </section>
                 </section>
             </section>
         </section>   

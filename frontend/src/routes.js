@@ -11,6 +11,7 @@ import Funcionario from './pages/Funcionarios';
 import RDC from './pages/RDCs';
 import PrivateRoute from './pages/PrivateRoute';
 import NotFound from './pages/NotFound';
+import List from './pages/List';
 
 
 export default function Routes(){
@@ -24,6 +25,7 @@ export default function Routes(){
                 <PrivateRoute path="/Lideres" component ={Lider}/>
                 <PrivateRoute path="/Funcionarios" component ={Funcionario}/>
                 <PrivateRoute path="/RDCs" component ={RDC}/>
+                <PrivateRoute path="/list" component ={List}/>
                 <PrivateRoute component ={NotFound}/>
             </Switch>
         </BrowserRouter>    

@@ -15,60 +15,21 @@ export default function RDC(){
     const [cod, setCod] = useState('');
     const [obra, setObra] = useState('');
     const [name_leader, setName_leader] = useState('');
-    const [area_activity1, setAreaactivity1] = useState('');
-    const [cod_activity1, setCodactivity1] = useState('');
-    const [description_activity1, setDescription_activity1] = useState('');
-    const [area_activity2, setAreaactivity2] = useState('');
-    const [cod_activity2, setCodactivity2] = useState('');
-    const [description_activity2, setDescription_activity2] = useState('');
-    const [area_activity3, setAreaactivity3] = useState('');
-    const [cod_activity3, setCodactivity3] = useState('');
-    const [description_activity3, setDescription_activity3] = useState('');
-    const [area_activity4, setAreaactivity4] = useState('');
-    const [cod_activity4, setCodactivity4] = useState('');
-    const [description_activity4, setDescription_activity4] = useState('');
-    const [area_activity5, setAreaactivity5] = useState('');
-    const [cod_activity5, setCodactivity5] = useState('');
-    const [description_activity5, setDescription_activity5] = useState('');
-    const [area_activity6, setAreaactivity6] = useState('');
-    const [cod_activity6, setCodactivity6] = useState('');
-    const [description_activity6, setDescription_activity6] = useState('');
     const [area2, setArea2] = useState('');
     const [cod2, setCod2] = useState('');
     const [obra2, setObra2] = useState('');
     const [name_leader2, setName_leader2] = useState('');
-    const [area_activity12, setAreaactivity12] = useState('');
-    const [cod_activity12, setCodactivity12] = useState('');
-    const [description_activity12, setDescription_activity12] = useState('');
-    const [area_activity22, setAreaactivity22] = useState('');
-    const [cod_activity22, setCodactivity22] = useState('');
-    const [description_activity22, setDescription_activity22] = useState('');
-    const [area_activity32, setAreaactivity32] = useState('');
-    const [cod_activity32, setCodactivity32] = useState('');
-    const [description_activity32, setDescription_activity32] = useState('');
-    const [area_activity42, setAreaactivity42] = useState('');
-    const [cod_activity42, setCodactivity42] = useState('');
-    const [description_activity42, setDescription_activity42] = useState('');
-    const [area_activity52, setAreaactivity52] = useState('');
-    const [cod_activity52, setCodactivity52] = useState('');
-    const [description_activity52, setDescription_activity52] = useState('');
-    const [area_activity62, setAreaactivity62] = useState('');
-    const [cod_activity62, setCodactivity62] = useState('');
-    const [description_activity62, setDescription_activity62] = useState('');
     const [updateId, setId] = useState('');
     const[Leaders, SetLeaders] = useState([]);
-    const [atividade, setAtividade] = useState('');
+    
     useEffect(()=>handlePopulate(), []);
 
    
 
     async function handlePopulate(){
         try{
-            api.get('http://localhost:3333/activities').then(response => {
-                setAtividade(response.data);
-            })
             api.get('http://localhost:3333/leaders').then(response => {
-                SetLeaders(response.data);
+            SetLeaders(response.data);
             })
         }catch{
             alert('Erro ao caregar o formulário');
@@ -83,25 +44,7 @@ export default function RDC(){
             area,
             cod,
             obra,
-            name_leader, 
-            area_activity1,           
-            cod_activity1,
-            description_activity1,
-            area_activity2,           
-            cod_activity2,
-            description_activity2,
-            area_activity3,           
-            cod_activity3,
-            description_activity3,
-            area_activity4,           
-            cod_activity4,
-            description_activity4,
-            area_activity5,           
-            cod_activity5,
-            description_activity5,
-            area_activity6,           
-            cod_activity6,
-            description_activity6,
+            name_leader,             
         };
        
         try {
@@ -149,25 +92,7 @@ export default function RDC(){
                         area2,
                         cod2,
                         obra2,
-                        name_leader2, 
-                        area_activity12,           
-                        cod_activity12,
-                        description_activity12,
-                        area_activity22,           
-                        cod_activity22,
-                        description_activity22,
-                        area_activity32,           
-                        cod_activity32,
-                        description_activity32,
-                        area_activity42,           
-                        cod_activity42,
-                        description_activity42,
-                        area_activity52,           
-                        cod_activity52,
-                        description_activity52,
-                        area_activity62,           
-                        cod_activity62,
-                        description_activity62,
+                        name_leader2,                         
                     };                            
                     try{
                         await api.put(`rdcs/${updateId}`, data2);
@@ -224,7 +149,7 @@ export default function RDC(){
              <div className="Meio">
                 <div className="Crud">
                     <section className="actions">
-                        <button onClick={handeleList} className="card-title"> <FiList size={25}/>Lista de Funcionários </button>
+                        <button onClick={handeleList} className="card-title"> <FiList size={25}/>Lista de RDCs</button>
                     </section>
                     <section className="cards">
                     <ul className="list">
@@ -247,11 +172,11 @@ export default function RDC(){
                         </ul>
                     </section>
                     <section className="actions">
-                         <text className="card-title"> <FiList size={25}/>Adicionar novo RDC</text>
+                         <text className="card-title"> <FiPlusCircle size={25}/>Adicionar novo RDC</text>
                     </section>
                     <section className="cards-new">
                         <section className="form">
-                            <form className="new">
+                            <form onSubmit={handleRegister} className="new">
                                 <section className="campos">
                                     <input className="imput" 
                                         placeholder="Digite a área do RDC"
@@ -269,70 +194,53 @@ export default function RDC(){
                                         onChange={e => setObra(e.target.value)}
                                     />
                                     <label>Líder:
-                                        <select name="Lider" id="lider" onChange={e => setName_leader2(e.target.value)} >
-                                            <option value={name_leader2}>Selecione um líder</option>
+                                        <select name="Lider" id="lider" onChange={e => setName_leader(e.target.value)} >
+                                            <option value={name_leader}>Selecione um líder</option>
                                             {Leaders.map(leader => (<option key={leader.name} value={leader.name} >{leader.name}</option>))}
                                         </select>
-                                    </label>  
-                                    <label>Líder:
-                                        <select name="Lider" id="lider" onChange={e => setName_leader2(e.target.value)} >
-                                            <option value={name_leader2}>Selecione um líder</option>
-                                            {atividade.map(atividade => (<option key={atividade.name} value={atividade.name} >{atividade.name}</option>))}
-                                        </select>
-                                    </label>  
-                                    <label htmlFor="Atividade">Selecione a segunda atividade:</label>
-                                    <select id="atividade" name="atividade" className="imput">
-                                        <option value="atividade1">Atividade 1</option>
-                                        <option value="atividade2">Atividade 2</option>
-                                        <option value="atividade3">Atividade 3</option>
-                                        <option value="atividade4">Atividade 4</option>
-                                        <option value="atividade5">Atividade 5</option>
-                                    </select>  
-                                    <textarea className="imput" type="textarea" placeholder="Digite uma pequena descrição da atividade"/>  
-                                    <label htmlFor="Atividade">Selecione a terceira atividade:</label>
-                                    <select id="atividade" name="atividade" className="imput">
-                                        <option value="atividade1">Atividade 1</option>
-                                        <option value="atividade2">Atividade 2</option>
-                                        <option value="atividade3">Atividade 3</option>
-                                        <option value="atividade4">Atividade 4</option>
-                                        <option value="atividade5">Atividade 5</option>
-                                    </select>
-                                    <textarea className="imput" type="textarea" placeholder="Digite uma pequena descrição da atividade"/>    
-                                    <label htmlFor="Atividade">Selecione a quarta atividade:</label>
-                                    <select id="atividade" name="atividade" className="imput">
-                                        <option value="atividade1">Atividade 1</option>
-                                        <option value="atividade2">Atividade 2</option>
-                                        <option value="atividade3">Atividade 3</option>
-                                        <option value="atividade4">Atividade 4</option>
-                                        <option value="atividade5">Atividade 5</option>
-                                    </select>
-                                    <textarea className="imput" type="textarea" placeholder="Digite uma pequena descrição da atividade"/>    
-                                    <label htmlFor="Atividade">Selecione a quinta atividade:</label>
-                                    <select id="atividade" name="atividade" className="imput">
-                                        <option value="atividade1">Atividade 1</option>
-                                        <option value="atividade2">Atividade 2</option>
-                                        <option value="atividade3">Atividade 3</option>
-                                        <option value="atividade4">Atividade 4</option>
-                                        <option value="atividade5">Atividade 5</option>
-                                    </select>
-                                    <textarea className="imput" type="textarea" placeholder="Digite uma pequena descrição da atividade"/>    
-                                        <label htmlFor="Atividade">Selecione a sexta atividade:</label>
-                                    <select id="atividade" name="atividade" className="imput">
-                                        <option value="atividade1">Atividade 1</option>
-                                        <option value="atividade2">Atividade 2</option>
-                                        <option value="atividade3">Atividade 3</option>
-                                        <option value="atividade4">Atividade 4</option>
-                                        <option value="atividade5">Atividade 5</option>
-                                    </select>
-                                    <textarea className="imput" type="textarea" placeholder="Digite uma pequena descrição da atividade"/>                                           
+                                    </label>                                                                                 
                                 </section>
                                 <section >
                                     <button className="button-card" type="submit"> <FiPlusCircle size={25} color="blue"/></button>
                                 </section>
                             </form>
-                        </section>
-                                                                   
-                    </section>                   
+                        </section>                                                                   
+                    </section> 
+                    <section className="actions">
+                         <text className="card-title"> <FiEdit size={25}/>Editar RDC</text>
+                    </section>
+                    <section className="cards-new">
+                        <section className="form">
+                            <form className="new">
+                                <section className="campos">
+                                    <input className="imput" 
+                                        placeholder="Digite a área do RDC"
+                                        value={area2}
+                                        onChange={e => setArea(e.target.value)}
+                                    />
+                                    <input className="imput" 
+                                        placeholder="Digite o código do RDC"
+                                        value={cod2}
+                                        onChange={e => setCod(e.target.value)}
+                                    />
+                                    <input className="imput" 
+                                        placeholder="Digite a obra do RDC"
+                                        value={obra2}
+                                        onChange={e => setObra(e.target.value)}
+                                    />
+                                    <label>Líder:
+                                        <select name="Lider" id="lider" onChange={e => setName_leader2(e.target.value)} >
+                                            <option value={name_leader2}>Selecione um líder</option>
+                                            {Leaders.map(leader => (<option key={leader.name} value={leader.name} >{leader.name}</option>))}
+                                        </select>
+                                    </label>                                                                                 
+                                </section>
+                                <section >
+                                <submit onClick={handleUpdate} className="button-card" > <FiEdit size={25} color="green"/>Id:{updateId}</submit>    
+                                </section>
+                            </form>
+                        </section>                                                                   
+                    </section>                     
                 </div>               
              </div>           
           </section>
