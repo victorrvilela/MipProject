@@ -4,13 +4,13 @@ module.exports = {
     async create(request,response){
         const {email, password} = request.body;        
         try{
-            const adm = await connection('adms')
+            const leader = await connection('leaders')
             .where('email', email)
             .where('password', password)
             .select('name')
             .first();            
-            if(adm){
-                return response.json(adm);
+            if(leader){
+                return response.json(leader);
             }
             else{
                 return response.status(400)

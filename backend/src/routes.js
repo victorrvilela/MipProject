@@ -8,6 +8,7 @@ const ActivityController = require('./controllers/ActivityController');
 const RdcController = require('./controllers/RdcController');
 const ProfileController = require('./controllers/ProfileController');
 const LoginController = require('./controllers/LoginController');
+const LoginControllerLeader = require('./controllers/LoginControllerLeader');
 const RdcResponseController = require('./controllers/RdcResponseController');
 
 const routes = express.Router();
@@ -44,5 +45,6 @@ routes.delete('/response/:id',RdcResponseController.delete);
 routes.get('/profiles',ProfileController.index);
 
 routes.post('/login', LoginController.create);
+routes.post('/leaderlogin', LoginControllerLeader.create);
 
 module.exports = routes;

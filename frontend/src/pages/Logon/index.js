@@ -40,13 +40,16 @@ export default function Logon(){
                             <input 
                                 className="imput" 
                                 placeholder="Digite seu Email"
+                                type ="email"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                             />
                             <input 
+                                type="password"
                                 className="imput" 
                                 placeholder="Digite sua Senha"
                                 value={password}
+                                
                                 onChange={e => setPassword(e.target.value)}
                             />
                             <button className="button" type="submit">Entrar</button>

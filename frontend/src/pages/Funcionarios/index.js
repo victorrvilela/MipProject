@@ -165,7 +165,7 @@ export default function Funcionario(){
                         </ul>
                     </section>
                     <section className="actions">
-                         <text className="card-title"> <FiList size={25}/>Adicionar novo funcionário</text>
+                         <text className="card-title"> <FiPlusCircle size={25}/>Adicionar novo funcionário</text>
                     </section>
                     <section className="cards-new">
                         <section className="form">
@@ -200,7 +200,7 @@ export default function Funcionario(){
                         </section>                                         
                     </section>   
                     <section className="actions">
-                         <text className="card-title"> <FiList size={25}/>Editar funcionário</text>
+                         <text className="card-title"> <FiEdit size={25}/>Editar funcionário</text>
                     </section>
                     <section className="cards-new">
                         <section className="form">
