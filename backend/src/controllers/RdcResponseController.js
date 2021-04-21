@@ -100,6 +100,7 @@ module.exports = {
             cod_employee15,
             occupation_employee15,
             hr_15_ativ,
+            obs,
             } = request.body;
         const name_leader = request.headers.authorization;
         try{
@@ -194,6 +195,8 @@ module.exports = {
             cod_employee15,
             occupation_employee15,
             hr_15_ativ,
+            obs,
+
         });
 
             return response.json({id});
