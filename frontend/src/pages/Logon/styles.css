@@ -1,7 +1,6 @@
 img{
     width: 40%;
-    height: 40%;
-    border: solid black;
+    height: 40%;    
     margin: 0 auto;
 }
 
@@ -32,7 +31,7 @@ img{
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #faad64 ;   
+    background: #fa8415;    
     flex-direction: column; 
      
 }
@@ -48,14 +47,14 @@ img{
 
 
 .logon-container section.form form h1{
-    color: #fa8415;
+    color: black ; 
     font-size: 32px;
     text-align: center;
     font-size:500;
 }
 
 .button{
-    background-color: #fa8415;
+    background-color:#f3f3f3 ; 
     color: rgb(0, 0, 0);
     margin-top: 20px;
     width: 100%;

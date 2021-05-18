@@ -3,7 +3,6 @@ import { FaList, FaWrench } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
 import { Link , useHistory} from 'react-router-dom';
 
-
 import './styles.css';
 
 import MIPlogo from '../../assets/logoMIP.png'
