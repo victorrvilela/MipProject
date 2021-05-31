@@ -5,16 +5,21 @@ exports.seed = function(knex) {
     .then(function () {
       // Inserts seed entries
       return knex('adms').insert([
-        {id: 1, name: 'Kethory',
-          password:'123456',
-          email:'kethorybarros@gmail.com',
-          phone:'31 98668-2581'
-        },
-        {id: 2, name: 'Victor',
+        {
+          id: 1,
+          name: 'Victor',
           password:'1',
           email:'victorrochavilela@gmail.com',
-          phone:'31 999999999'
+          phone:'31983063928'
         },
+        {
+          id: 2,
+          name: 'Kethory',
+          password:'1',
+          email:'kethorybarros@gmail.com',
+          phone:'31999999999'
+        },
+        
       ]);
     });
 };

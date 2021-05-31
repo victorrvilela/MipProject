@@ -10,7 +10,7 @@ module.exports = {
       },
 
     async create (request, response){
-        const {name, password, email, phone} = request.body;
+        const {name, password, email, phone,area} = request.body;
         const name_adm = request.headers.authorization;
         try
         {  const teste = await connection('leaders')
@@ -23,6 +23,7 @@ module.exports = {
                   password,
                   email,
                   phone,
+                  area,
                   name_adm,
               });
 
@@ -42,6 +43,7 @@ module.exports = {
       const password = request.body.password2;
       const email = request.body.email2;
       const phone = request.body.phone2;       
+      const area = request.body.area2;
       try{
         const teste = await connection('leaders').where('email', email).first();        
         if(teste.id ==id){             
@@ -50,6 +52,7 @@ module.exports = {
             password,
             email,
             phone,
+            area,
         });
           return response.json({sucess: 'Líder atualizado com sucesso'});        
         }
@@ -64,6 +67,7 @@ module.exports = {
             password,
             email,
             phone,
+            area,
         });
           return response.json({sucess: 'Líder atualizado com sucesso'});        
         }catch{

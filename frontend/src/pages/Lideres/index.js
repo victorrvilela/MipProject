@@ -16,10 +16,12 @@ export default function Lider(){
         const [password, setPassword] = useState('');
         const [email, setEmail] = useState('');
         const [phone, setPhone] = useState('');
+        const [area, setArea] = useState('');
         const [name2, setName2] = useState('');
         const [password2, setPassword2] = useState('');
         const [email2, setEmail2] = useState('');
         const [phone2, setPhone2] = useState('');
+        const [area2, setArea2] = useState('');
         const [updateId, setId] = useState('');
         
         
@@ -30,7 +32,8 @@ export default function Lider(){
                 name,
                 password,
                 email,
-                phone,                        
+                phone, 
+                area,                       
             };
             
             try {
@@ -73,7 +76,7 @@ export default function Lider(){
         
         async function handleUpdate(e){  
             if(updateId!==''){
-                if(name2!==''&&password2!==''&&email2!==''&&phone2!==''){
+                if(name2!==''&&password2!==''&&email2!==''&&phone2!==''&&area2!==''){
                     if(window.confirm(`Tem certeza que deseja atualizar o líder de ID: ${updateId}`)){
                         e.preventDefault();        
                         const data2= {
@@ -81,6 +84,7 @@ export default function Lider(){
                             password2,
                             email2,
                             phone2,
+                            area2,
                         };                            
                         try{
                             await api.put(`leaders/${updateId}`, data2);
@@ -152,6 +156,8 @@ export default function Lider(){
                                       <text>{leader.email}  /  </text>
                                       <strong>Telefone: </strong>
                                       <text>{leader.phone}    </text>
+                                      <strong>Area: </strong>
+                                      <text>{leader.area}    </text>
                                       <section className="button-section">
                                           <button onClick={()=>handleDelete(leader.id)} className="button-card" type="submit"> <FiTrash2 size={25} color="red"/></button>
                                           <button onClick={()=>setId(leader.id)} className="button-card" type="submit"> <FiEdit size={25} color="green"/></button>
@@ -191,7 +197,13 @@ export default function Lider(){
                                               placeholder="Digite o telefone do novo Lider"
                                               value={phone}
                                               onChange={e => setPhone(e.target.value)}
-                                          />                                    
+                                          />      
+                                          <input 
+                                              className="imput" 
+                                              placeholder="Digite a área de atuação do novo Lider"
+                                              value={area}
+                                              onChange={e => setArea(e.target.value)}
+                                          />                              
                                       </section>
                                       <section>
                                           <button className="button-card" type="submit"> <FiPlusCircle size={25} color="blue"/></button>
@@ -232,6 +244,12 @@ export default function Lider(){
                                                   value={phone2}
                                                   onChange={e => setPhone2(e.target.value)}
                                               />   
+                                              <input 
+                                                    className="imput" 
+                                                    placeholder="Digite a área de atuação do novo Lider"
+                                                    value={area2}
+                                                    onChange={e => setArea2(e.target.value)}
+                                                />      
                                                                                
                                           </section>
                                           <section>

@@ -5,8 +5,10 @@ const AdmController = require('./controllers/AdmController');
 const LeaderController = require('./controllers/LeaderController');
 const EmployeeController = require('./controllers/EmployeeController');
 const ActivityController = require('./controllers/ActivityController');
+const ActivityFilterController = require('./controllers/ActivityFilterController');
 const RdcController = require('./controllers/RdcController');
 const ProfileController = require('./controllers/ProfileController');
+const AreaController = require('./controllers/AreaController');
 const LoginController = require('./controllers/LoginController');
 const LoginControllerLeader = require('./controllers/LoginControllerLeader');
 const RdcResponseController = require('./controllers/RdcResponseController');
@@ -43,6 +45,8 @@ routes.post('/response',RdcResponseController.create);
 routes.delete('/response/:id',RdcResponseController.delete);
 
 routes.get('/profiles',ProfileController.index);
+routes.post('/area', AreaController.index);
+routes.post('/areafiltrada', ActivityFilterController.index);
 
 routes.post('/login', LoginController.create);
 routes.post('/leaderlogin', LoginControllerLeader.create);

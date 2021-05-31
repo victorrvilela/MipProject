@@ -5,6 +5,7 @@ exports.up = function(knex) {
       table.string('password').notNullable();
       table.string('email').notNullable();
       table.string('phone').notNullable();
+      table.string('area').notNullable();
   
       table.string('name_adm').notNullable();
       table.foreign('name_adm').references('name').inTable('adms');
