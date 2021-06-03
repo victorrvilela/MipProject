@@ -13,16 +13,18 @@ import styles from './styles';
 export default function Response(){
     const [leader, setLeader] = useState('');
     const [area, setArea] = useState('');
+
     useEffect(()=>{
-        controleFluxo();                      
+        getData();                              
     },[]);
 
-    async function controleFluxo(){
-        await getData();
-        await getArea();        
-        await getQuest();
-        console.log('fim do controle de fluxo');
-    }
+    
+    setTimeout(() => {
+        getArea()
+    }, 0);
+    setTimeout(() => {
+        getQuest()
+    }, 0);
     async function getData(){        
         try {
           const valueData = await AsyncStorage.getItem('LeaderName')
@@ -31,27 +33,31 @@ export default function Response(){
           }          
         } catch(e) {
             alert('erro ao logar');
-        }
-        console.log('fim getdata')
+            logout();
+        }        
       }
+      
     //arrumar o fluxo das funções callback ou algo do tipo
+    //ver settimeout
+    //ver callback
 
-    async function getArea(){                     
-        try{
-            const response = await api.post('area', {leader});                        
-            await response.data.map(item => {setArea(item.area)}) 
-                                                                                     
-        }catch{
-            alert('erro ao buscar area')
-        }       
-        console.log('fim getarea')
-       
+    async function getArea(){  
+        if(area==''){
+            try{
+                const response = await api.post('area', {leader});                        
+                await response.data.map(item => {setArea(item.area)}) 
+                                                                                         
+            }catch{
+                alert('erro ao buscar area')
+            }       
+        }
     }
     
-    async function getQuest(){                
-        const atividade = await api.post('areafiltrada', {area});
-        setquest(atividade.data)     
-        console.log('fim getquest')      
+    async function getQuest(){  
+        if(quest.length===0){
+            const atividade = await api.post('areafiltrada', {area});
+            setquest(atividade.data) 
+        }             
     }
     
     const logout = async () =>{
@@ -64,13 +70,14 @@ export default function Response(){
         navagation.navigate('Login');
     }
 
-    const [chuva_selected, setchuva_Selected] = useState();
-    const [redalert_selected, setredalert_Selected] = useState();
-    const [quest_selected, setquest_Selected] = useState();
+    const [chuva_selected, setchuva_Selected] = useState('');
+    const [redalert_selected, setredalert_Selected] = useState('');
+    const [quest_selected, setquest_Selected] = useState('');
     
     const [quest, setquest] = useState([]);
     
-    const options = ["Manhã", "Tarde", "Não houve"];
+    const options = ["Manhã ", "Tarde ", "Não houve "];
+    const options2 = ["Manhã", "Tarde", "Não houve"];
 
     
 
@@ -113,15 +120,13 @@ export default function Response(){
                                 placeholder={"Chuva"}
                                 placeholderStyle={{color:"black"}}
                                 doneButtonText={"escolhido"}
-                                onValueChange={(value) => {
-                                    // Do anything you want with the value. 
-                                    // For example, save in state.
-                                    setchuva_Selected(value);
+                                onValueChange={(value2) => {                                    
+                                    setchuva_Selected(value2);
                                 }}
                                 chuva_selected={chuva_selected}
                             >                                
-                                {Object.values(options).map((val, index) => (
-                                    <SelectPicker.Item label={val} value={val} key={index}  />
+                                {Object.values(options2).map((val2,index2) => (
+                                    <SelectPicker.Item label={val2} value={val2} key={index2}/>
                                 ))}
                             </SelectPicker>
                         </View>
@@ -137,8 +142,8 @@ export default function Response(){
                                 }}
                                 redalert_selected={redalert_selected}
                             >                                
-                                {Object.values(options).map((val, index) => (
-                                    <SelectPicker.Item label={val} value={val} key={index}  />
+                                {Object.values(options).map((val, index2) => (
+                                    <SelectPicker.Item label={val} value={val}  key={index2} />
                                 ))}
                             </SelectPicker>
                         </View>
