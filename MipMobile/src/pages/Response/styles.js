@@ -32,6 +32,7 @@ export default StyleSheet.create({
         borderRadius:20,
         width:300,
         marginTop:10,
+        alignItems:'center',        
     },
     
     title:{

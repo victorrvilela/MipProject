@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {View, Image, Text, KeyboardAvoidingView, Platform, ScrollView, FlatList} from 'react-native';
-import { Input, Button } from 'react-native-elements';
+import {Button, Switch } from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons';
+
 import api from '../../services/api'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectPicker from 'react-native-form-select-picker'; // Import the pack
@@ -10,21 +10,24 @@ import SelectPicker from 'react-native-form-select-picker'; // Import the pack
 import logoMip from '../../assets/logoMIP.png';
 import styles from './styles';
 
+// colocar o picker nesse formato
+      //https://reactnativeexample.com/react-native-selectbox-picker-multi-select-multi-picker/
+//fazer switch funcionar por questão
 export default function Response(){
     const [leader, setLeader] = useState('');
     const [area, setArea] = useState('');
 
+    
     useEffect(()=>{
         getData();                              
     },[]);
-
-    
     setTimeout(() => {
         getArea()
     }, 0);
     setTimeout(() => {
         getQuest()
     }, 0);
+    
     async function getData(){        
         try {
           const valueData = await AsyncStorage.getItem('LeaderName')
@@ -37,9 +40,7 @@ export default function Response(){
         }        
       }
       
-    //arrumar o fluxo das funções callback ou algo do tipo
-    //ver settimeout
-    //ver callback
+      
 
     async function getArea(){  
         if(area==''){
@@ -72,7 +73,7 @@ export default function Response(){
 
     const [chuva_selected, setchuva_Selected] = useState('');
     const [redalert_selected, setredalert_Selected] = useState('');
-    const [quest_selected, setquest_Selected] = useState('');
+   
     
     const [quest, setquest] = useState([]);
     
@@ -112,9 +113,7 @@ export default function Response(){
                 keyboardVerticalOffset={150}
             >
                 <ScrollView style ={{width: "100%"}} showsVerticalScrollIndicator ={false}>                    
-                    <View style={styles.body}>
-                    
-
+                    <View style={styles.body}>            
                         <View style={styles.quest}>
                             <SelectPicker 
                                 placeholder={"Chuva"}
@@ -136,8 +135,6 @@ export default function Response(){
                                 placeholderStyle={{color:"black"}}
                                 doneButtonText={"escolhido"}
                                 onValueChange={(value) => {
-                                    // Do anything you want with the value. 
-                                    // For example, save in state.
                                     setredalert_Selected(value);
                                 }}
                                 redalert_selected={redalert_selected}
@@ -147,21 +144,18 @@ export default function Response(){
                                 ))}
                             </SelectPicker>
                         </View>
-                        <FlatList
+                        
+                        <FlatList                        
                         data={quest}
                         keyExtractor = {quest => String(quest.description)}
                         showsVerticalScrollIndicator = {false}
                         renderItem ={({item: quest})=>(
-                            <View>
-                                <Text>{quest.description}</Text>
-                            </View> 
-                           
-
+                            <View style={styles.quest}>
+                                <Text>{quest.description}</Text>                                
+                            </View>                            
                         )}
                         />
-                        
-                    
-
+                          
 
 
 
