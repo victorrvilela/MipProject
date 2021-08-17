@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {View, Image, Text, KeyboardAvoidingView, Platform, ScrollView, FlatList} from 'react-native';
+import React, { Component, useEffect, useState } from 'react';
+import {CheckBox, View, Image, Text, KeyboardAvoidingView, Platform, ScrollView, FlatList} from 'react-native';
 import {Button, Switch } from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 
@@ -8,16 +8,23 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectPicker from 'react-native-form-select-picker'; // Import the pack
 
 import logoMip from '../../assets/logoMIP.png';
+
 import styles from './styles';
+
+
 
 // colocar o picker nesse formato
       //https://reactnativeexample.com/react-native-selectbox-picker-multi-select-multi-picker/
 //fazer switch funcionar por questão
+
+//https://www.freecodecamp.org/news/how-to-work-with-multiple-checkboxes-in-react/
+//multi checkbox mais promissor por enquanto
+
 export default function Response(){
     const [leader, setLeader] = useState('');
     const [area, setArea] = useState('');
-
-    
+    const [isSelected, setSelection] = useState(false);
+        
     useEffect(()=>{
         getData();                              
     },[]);
@@ -39,9 +46,7 @@ export default function Response(){
             logout();
         }        
       }
-      
-      
-
+          
     async function getArea(){  
         if(area==''){
             try{
@@ -57,7 +62,7 @@ export default function Response(){
     async function getQuest(){  
         if(quest.length===0){
             const atividade = await api.post('areafiltrada', {area});
-            setquest(atividade.data) 
+            setquest(atividade.data)          
         }             
     }
     
@@ -76,6 +81,7 @@ export default function Response(){
    
     
     const [quest, setquest] = useState([]);
+    const [quest2, setquest2] = useState([]);
     
     const options = ["Manhã ", "Tarde ", "Não houve "];
     const options2 = ["Manhã", "Tarde", "Não houve"];
@@ -115,8 +121,9 @@ export default function Response(){
                 <ScrollView style ={{width: "100%"}} showsVerticalScrollIndicator ={false}>                    
                     <View style={styles.body}>            
                         <View style={styles.quest}>
+                            <Text style={styles.title}>Chuva</Text> 
                             <SelectPicker 
-                                placeholder={"Chuva"}
+                                placeholder={"clique para responder"}
                                 placeholderStyle={{color:"black"}}
                                 doneButtonText={"escolhido"}
                                 onValueChange={(value2) => {                                    
@@ -130,8 +137,9 @@ export default function Response(){
                             </SelectPicker>
                         </View>
                         <View style={styles.quest}>
+                        <Text style={styles.title}>Alerta vermelho</Text> 
                             <SelectPicker 
-                                placeholder={"Alerta Vermelho"}
+                                placeholder={"clique para responder"}
                                 placeholderStyle={{color:"black"}}
                                 doneButtonText={"escolhido"}
                                 onValueChange={(value) => {
@@ -143,25 +151,26 @@ export default function Response(){
                                     <SelectPicker.Item label={val} value={val}  key={index2} />
                                 ))}
                             </SelectPicker>
+                            
                         </View>
                         
                         <FlatList                        
                         data={quest}
-                        keyExtractor = {quest => String(quest.description)}
+                        keyExtractor = {quest => String(quest.description)}                        
                         showsVerticalScrollIndicator = {false}
                         renderItem ={({item: quest})=>(
                             <View style={styles.quest}>
-                                <Text>{quest.description}</Text>                                
+                                <Text>{quest.description}</Text> 
+                                <CheckBox
+                                   value={isSelected}
+                                   onValueChange={setSelection}                                  
+                                />                     
                             </View>                            
                         )}
                         />
+                           
+                    
                           
-
-
-
-
-
-
 
                       
                         <View>
