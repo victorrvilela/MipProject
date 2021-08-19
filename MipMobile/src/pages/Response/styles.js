@@ -7,7 +7,8 @@ export default StyleSheet.create({
         paddingHorizontal: 24,
         paddingTop: Constants.statusBarHeight + 10,
         alignItems: 'center',
-        backgroundColor: '#faad64',        
+        backgroundColor: '#faad64', 
+            
     },
 
     image:{        
@@ -52,7 +53,17 @@ export default StyleSheet.create({
         backgroundColor: '#FFFFFF',
         width:300,
         borderRadius:20,
-        marginTop:30,
+        marginTop:10,
+        height:50,
+        alignItems:'center',
+        textAlign:'center',
     },
+    submitButtonText: {
+        fontWeight: 'bold',
+        color: 'black',
+        borderRadius:20,
+        borderColor: 'black',
+        marginTop:10,
+      },
 
 })

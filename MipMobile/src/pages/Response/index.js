@@ -12,29 +12,35 @@ import logoMip from '../../assets/logoMIP.png';
 import styles from './styles';
 
 
+/* ///////////////////////comentários//////////////////////////////
+fazer switch funcionar por questão
 
-// colocar o picker nesse formato
-      //https://reactnativeexample.com/react-native-selectbox-picker-multi-select-multi-picker/
-//fazer switch funcionar por questão
-
-//https://www.freecodecamp.org/news/how-to-work-with-multiple-checkboxes-in-react/
-//multi checkbox mais promissor por enquanto
-
+https://www.freecodecamp.org/news/how-to-work-with-multiple-checkboxes-in-react/
+multi checkbox mais promissor por enquanto
+*/
 export default function Response(){
     const [leader, setLeader] = useState('');
-    const [area, setArea] = useState('');
-    const [isSelected, setSelection] = useState(false);
+    const [area, setArea] = useState('');    
+    const [flag, setFlag] = useState(0); 
+    
+      
+    const [isSelected, setSelection]  = useState([false,false,false]);  
+
+    async function handleOnChange (position) {
+        const updatedCheckedState = isSelected.map((item, index) =>
+          index == position ? !item : item
+        );
+                
+        console.log(isSelected);
+        setSelection(position[updatedCheckedState]);        
+    }
         
     useEffect(()=>{
         getData();                              
-    },[]);
-    setTimeout(() => {
-        getArea()
-    }, 0);
-    setTimeout(() => {
-        getQuest()
-    }, 0);
-    
+        getArea();
+        getQuest();
+    },quest);
+
     async function getData(){        
         try {
           const valueData = await AsyncStorage.getItem('LeaderName')
@@ -58,12 +64,12 @@ export default function Response(){
             }       
         }
     }
-    
+
     async function getQuest(){  
         if(quest.length===0){
             const atividade = await api.post('areafiltrada', {area});
             setquest(atividade.data)          
-        }             
+        }
     }
     
     const logout = async () =>{
@@ -81,7 +87,7 @@ export default function Response(){
    
     
     const [quest, setquest] = useState([]);
-    const [quest2, setquest2] = useState([]);
+    
     
     const options = ["Manhã ", "Tarde ", "Não houve "];
     const options2 = ["Manhã", "Tarde", "Não houve"];
@@ -89,6 +95,7 @@ export default function Response(){
     
 
     return (
+        
         <View style={styles.container}>
             <View style={styles.header} >                        
                         <View style={styles.wellcome}>                                                    
@@ -118,7 +125,7 @@ export default function Response(){
                 style={styles.container}
                 keyboardVerticalOffset={150}
             >
-                <ScrollView style ={{width: "100%"}} showsVerticalScrollIndicator ={false}>                    
+                <ScrollView style ={{width: "100%"}} showsVerticalScrollIndicator ={false} horizontal={true}>                    
                     <View style={styles.body}>            
                         <View style={styles.quest}>
                             <Text style={styles.title}>Chuva</Text> 
@@ -156,87 +163,36 @@ export default function Response(){
                         
                         <FlatList                        
                         data={quest}
-                        keyExtractor = {quest => String(quest.description)}                        
+                        extraData={isSelected}                                    
+                        keyExtractor = {quest => String(quest.description)}
+                        keyExtractor = {quest => String(quest.id)}                         
                         showsVerticalScrollIndicator = {false}
-                        renderItem ={({item: quest})=>(
+                        
+                        renderItem ={({item: quest}, index)=>(
                             <View style={styles.quest}>
                                 <Text>{quest.description}</Text> 
-                                <CheckBox
-                                   value={isSelected}
-                                   onValueChange={setSelection}                                  
-                                />                     
+                                                 
                             </View>                            
                         )}
+                        
                         />
                            
                     
                           
 
                       
+                    
+                        
                         <View>
-                            <Text>     atividade (6 vezes)</Text>
+                            <Text>  carregar funcionários com campo para horas trabalhadas
+
+                            </Text>
                         </View>
-                        <View>
-                            <Text>   atividade (6 vezes)</Text>
-                        </View>
-                        <View>
-                            <Text> atividade (6 vezes)</Text>
-                        </View>
-                        <View>
-                            <Text>  atividade (6 vezes)</Text>
-                        </View>
-                        <View>
-                            <Text>  atividade (6 vezes)</Text>
-                        </View>
-                        <View>
-                            <Text>  atividade (6 vezes)</Text>
-                        </View>
-                        <View>
-                            <Text>  funcionário 15 vezes</Text>
-                        </View>
-                        <View>
-                            <Text>  funcionário 15 vezes</Text>
-                        </View>
-                        <View>
-                            <Text> funcionário 15 vezes</Text>
-                        </View>
-                        <View>
-                            <Text>  funcionário 15 vezes</Text>
-                        </View>
-                        <View>
-                            <Text>   funcionário 15 vezes</Text>
-                        </View>
-                        <View>
-                            <Text>  funcionário 15 vezes</Text>
-                        </View>
-                        <View>
-                            <Text>   funcionário 15 vezes</Text>
-                        </View>
-                        <View>
-                            <Text> funcionário 15 vezes</Text>
-                        </View>
-                        <View>
-                            <Text>  funcionário 15 vezes</Text>
-                        </View>
-                        <View>
-                            <Text>  funcionário 15 vezes</Text>
-                        </View>
+                       
                         <View>
                             <Text>  OBS</Text>
                         </View>
-                        <View style={styles.input}>
-                            <Button 
-                                onPress = {()=> getQuest()}                                          
-                                title = "carregar atividades"
-                                type = {"clear"}
-                                iconRight = {true}
-                                icon={{
-                                    name: "send",
-                                    size: 30,
-                                    color: "#faad64"
-                                }}
-                            />
-                        </View>
+                       
 
                         <View style={styles.input}>
                             <Button 
