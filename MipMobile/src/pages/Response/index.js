@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
-import {CheckBox, View, Image, Text, KeyboardAvoidingView, Platform, ScrollView, FlatList} from 'react-native';
+import {CheckBox, View, Image, Text, KeyboardAvoidingView, Platform, ScrollView, FlatList, TextInput} from 'react-native';
 import {Button, Switch } from 'react-native-elements';
 import {useNavigation} from '@react-navigation/native';
 
@@ -19,12 +19,26 @@ https://www.freecodecamp.org/news/how-to-work-with-multiple-checkboxes-in-react/
 multi checkbox mais promissor por enquanto
 */
 export default function Response(){
+
+    useEffect(()=>{
+        getData();                              
+        getArea();
+        getQuest();
+        getEmployee();
+    },employees);
+
+
     const [leader, setLeader] = useState('');
     const [area, setArea] = useState('');    
     const [flag, setFlag] = useState(0); 
-    const [checked, setCheked] = useState();
-      
+    const [checked, setCheked] = useState();      
+    const [chuva_selected, setchuva_Selected] = useState('');
+    const [redalert_selected, setredalert_Selected] = useState('');       
+    const [quest, setQuest] = useState([]);   
+    const [employees, setEmployees] = useState([]);       
+    const options = ["Manhã ", "Tarde ", "Não houve "];
     const [isSelected, setSelection]  = useState({0:false},{1:false},{2:false});  
+
 
     async function handleOnChange (idx){
         console.log(idx)
@@ -33,13 +47,9 @@ export default function Response(){
         //index === checked ? item : !item)
         //alert(checked);                      
     }
-    console.log(isSelected);
+    //console.log(isSelected);
         
-    useEffect(()=>{
-        getData();                              
-        getArea();
-        getQuest();
-    },quest);
+  
 
     async function getData(){        
         try {
@@ -68,9 +78,17 @@ export default function Response(){
     async function getQuest(){  
         if(quest.length===0){
             const atividade = await api.post('areafiltrada', {area});
-            setquest(atividade.data) 
-                     
+            setQuest(atividade.data)                      
         }
+    }
+    async function getEmployee(){  
+        if(employees.length===0){
+            await api.get('profiles',{
+                headers:{
+                    leader : leader
+                    }
+            }).then(response => {setEmployees(response.data);})                         
+        }                    
     }
     
     const logout = async () =>{
@@ -83,14 +101,7 @@ export default function Response(){
         navagation.navigate('Login');
     }
 
-    const [chuva_selected, setchuva_Selected] = useState('');
-    const [redalert_selected, setredalert_Selected] = useState('');
-   
     
-    const [quest, setquest] = useState([]);
-    
-    
-    const options = ["Manhã ", "Tarde ", "Não houve "];
     
 
     
@@ -127,7 +138,8 @@ export default function Response(){
                 keyboardVerticalOffset={150}
             >
                 <ScrollView style ={{width: "100%"}} showsVerticalScrollIndicator ={false} >                    
-                    <View style={styles.body}>            
+                    <View style={styles.body}> 
+                        <Text style={styles.title}>Alertas</Text>           
                         <View style={styles.quest}>
                             <Text style={styles.title}>Chuva</Text> 
                             <SelectPicker 
@@ -161,7 +173,7 @@ export default function Response(){
                             </SelectPicker>
                             
                         </View>
-                        
+                        <Text style={styles.title}>Atividades</Text>
                         <FlatList                        
                         data={quest}
                         extraData={checked}                                    
@@ -169,36 +181,52 @@ export default function Response(){
                         showsVerticalScrollIndicator = {false}                        
                         renderItem ={({item: quest}, index)=>(
                             <View style={styles.quest}>
-                                <Text>{quest.description}</Text>                                
+                                <Text>   {quest.description}</Text>                                
                                 <CheckBox
                                     value={false}
                                     onChange={()=>handleOnChange(quest)} //index tá dando undefined                             
-                                />                                                  
+                                />  
+                                <TextInput
+                                    style={styles.input}                                                                
+                                    placeholder="Descrição da atividade"                                
+                                />                                                
+                            </View>
+                                                        
+                        )}
+                        
+                        />
+                        <Text style={styles.title}>Funcionários</Text>
+                        <FlatList                        
+                        data={employees}                                                          
+                        keyExtractor = {employees => String(employees.name)}                        
+                        keyExtractor = {employees => String(employees.occupation)}
+                        showsVerticalScrollIndicator = {false}                        
+                        renderItem ={({item: employees}, index)=>(
+                            <View style={styles.quest}>
+                                <Text>Nome: {employees.name}</Text>
+                                <Text>Função: {employees.occupation}</Text>
+                                <TextInput
+                                style={styles.input}                                                                
+                                placeholder="Digite as horas trabalhadas pelo funcionário"
+                                keyboardType="numeric"
+                            />                                                                                                                 
                             </View>                            
                         )}
                         
                         />
-                           
-                    
-                          
-
-                      
-                    
                         
-                        <View>
-                            <Text>  carregar funcionários com campo para horas trabalhadas
-
-                            </Text>
-                        </View>
-                       
-                        <View>
+                        <View style={styles.quest}>
                             <Text>  OBS</Text>
-                        </View>
-                       
+                            <TextInput
+                                style={styles.input}                                                                
+                                placeholder="Utilize caso haja alguma observação a ser feita"                                
+                            />
+                        </View>            
 
+                                                                                                                                                 
                         <View style={styles.input}>
                             <Button 
-                                onPress = {()=>getArea()}                                          
+                                onPress = {()=>alert('RDC enviado para o banco de dados')}                                          
                                 title = "Enviar"
                                 type = {"clear"}
                                 iconRight = {true}

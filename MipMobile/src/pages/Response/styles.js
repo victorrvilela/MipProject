@@ -33,9 +33,10 @@ export default StyleSheet.create({
         borderRadius:20,
         width:300,
         marginTop:10,
-        alignItems:'center',        
+        alignItems:'center', 
+               
     },
-    
+  
     title:{
         fontWeight:'bold',
     },
@@ -51,7 +52,6 @@ export default StyleSheet.create({
     
     input:{
         backgroundColor: '#FFFFFF',
-        width:300,
         borderRadius:20,
         marginTop:10,
         height:50,
