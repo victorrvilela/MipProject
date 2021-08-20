@@ -22,18 +22,18 @@ export default function Response(){
     const [leader, setLeader] = useState('');
     const [area, setArea] = useState('');    
     const [flag, setFlag] = useState(0); 
-    
+    const [checked, setCheked] = useState();
       
-    const [isSelected, setSelection]  = useState([false,false,false]);  
+    const [isSelected, setSelection]  = useState({0:false},{1:false},{2:false});  
 
-    async function handleOnChange (position) {
-        const updatedCheckedState = isSelected.map((item, index) =>
-          index == position ? !item : item
-        );
-                
-        console.log(isSelected);
-        setSelection(position[updatedCheckedState]);        
+    async function handleOnChange (idx){
+        console.log(idx)
+        setCheked(quest.findIndex(quest => idx.description === quest.description));
+        //isSelected.map((item, index) =>
+        //index === checked ? item : !item)
+        //alert(checked);                      
     }
+    console.log(isSelected);
         
     useEffect(()=>{
         getData();                              
@@ -68,7 +68,8 @@ export default function Response(){
     async function getQuest(){  
         if(quest.length===0){
             const atividade = await api.post('areafiltrada', {area});
-            setquest(atividade.data)          
+            setquest(atividade.data) 
+                     
         }
     }
     
@@ -90,7 +91,7 @@ export default function Response(){
     
     
     const options = ["Manhã ", "Tarde ", "Não houve "];
-    const options2 = ["Manhã", "Tarde", "Não houve"];
+    
 
     
 
@@ -125,7 +126,7 @@ export default function Response(){
                 style={styles.container}
                 keyboardVerticalOffset={150}
             >
-                <ScrollView style ={{width: "100%"}} showsVerticalScrollIndicator ={false} horizontal={true}>                    
+                <ScrollView style ={{width: "100%"}} showsVerticalScrollIndicator ={false} >                    
                     <View style={styles.body}>            
                         <View style={styles.quest}>
                             <Text style={styles.title}>Chuva</Text> 
@@ -133,18 +134,18 @@ export default function Response(){
                                 placeholder={"clique para responder"}
                                 placeholderStyle={{color:"black"}}
                                 doneButtonText={"escolhido"}
-                                onValueChange={(value2) => {                                    
-                                    setchuva_Selected(value2);
+                                onValueChange={(value) => {                                    
+                                    setchuva_Selected(value);
                                 }}
                                 chuva_selected={chuva_selected}
                             >                                
-                                {Object.values(options2).map((val2,index2) => (
-                                    <SelectPicker.Item label={val2} value={val2} key={index2}/>
+                                {Object.values(options).map((val,index) => (
+                                    <SelectPicker.Item label={val} value={val} /> //exclui a key, pode ser que precise voltar
                                 ))}
                             </SelectPicker>
                         </View>
                         <View style={styles.quest}>
-                        <Text style={styles.title}>Alerta vermelho</Text> 
+                            <Text style={styles.title}>Alerta vermelho</Text> 
                             <SelectPicker 
                                 placeholder={"clique para responder"}
                                 placeholderStyle={{color:"black"}}
@@ -154,8 +155,8 @@ export default function Response(){
                                 }}
                                 redalert_selected={redalert_selected}
                             >                                
-                                {Object.values(options).map((val, index2) => (
-                                    <SelectPicker.Item label={val} value={val}  key={index2} />
+                                {Object.values(options).map((val, index) => (
+                                    <SelectPicker.Item label={val} value={val}/> //exclui a key, pode ser que precise voltar
                                 ))}
                             </SelectPicker>
                             
@@ -163,15 +164,16 @@ export default function Response(){
                         
                         <FlatList                        
                         data={quest}
-                        extraData={isSelected}                                    
-                        keyExtractor = {quest => String(quest.description)}
-                        keyExtractor = {quest => String(quest.id)}                         
-                        showsVerticalScrollIndicator = {false}
-                        
+                        extraData={checked}                                    
+                        keyExtractor = {quest => String(quest.description)}                        
+                        showsVerticalScrollIndicator = {false}                        
                         renderItem ={({item: quest}, index)=>(
                             <View style={styles.quest}>
-                                <Text>{quest.description}</Text> 
-                                                 
+                                <Text>{quest.description}</Text>                                
+                                <CheckBox
+                                    value={false}
+                                    onChange={()=>handleOnChange(quest)} //index tá dando undefined                             
+                                />                                                  
                             </View>                            
                         )}
                         
