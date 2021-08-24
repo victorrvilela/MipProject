@@ -27,25 +27,59 @@ export default function Response(){
         getEmployee();
     },employees);
 
-
+    
     const [leader, setLeader] = useState('');
     const [area, setArea] = useState('');    
-    const [flag, setFlag] = useState(0); 
-    const [checked, setCheked] = useState();      
+    const [flag, setFlag] = useState(2); 
+       
     const [chuva_selected, setchuva_Selected] = useState('');
     const [redalert_selected, setredalert_Selected] = useState('');       
     const [quest, setQuest] = useState([]);   
     const [employees, setEmployees] = useState([]);       
     const options = ["Manhã ", "Tarde ", "Não houve "];
-    const [isSelected, setSelection]  = useState({0:false},{1:false},{2:false});  
+    const [isSelected, setSelection]  = useState(
+        new Array(3).fill(false)
+      );
+    
+      //arrumar jeito de fazer isso automatizado
+    const [isSelected2, setSelection2]  = useState(false);
 
 
+    function faztudo(){
+        
+      // quest.map((item, index) => setQuest(quest[index],{checked:false}))
+       // console.log(quest[flag]) setQuest(...quest,{checked:false})
+      // console.log(quest)
+       console.log(isSelected)
+       
+     }
+    
+     
     async function handleOnChange (idx){
-        console.log(idx)
-        setCheked(quest.findIndex(quest => idx.description === quest.description));
+        console.log(idx)        
+        const teste = quest.findIndex(quest => idx.description === quest.description)
+        const teste2 = isSelected.map((item, index) =>
+        index === teste ? !item : item
+      );
+      console.log(teste2);
+        setSelection(teste2);
+      
+      /*
+       setSelection2(!isSelected2);
+        console.log(isSelected[teste])
+        console.log(isSelected)
+        setSelection(isSelected[teste])
+        isSelected.map((item,index )=> {
+            if(index === teste){
+                
+            }
+        }
+        )
+        console.log(isSelected)
+        //setCheked(quest.findIndex(quest => idx.description === quest.description));
         //isSelected.map((item, index) =>
         //index === checked ? item : !item)
-        //alert(checked);                      
+        //alert(checked);                      */
     }
     //console.log(isSelected);
         
@@ -78,8 +112,11 @@ export default function Response(){
     async function getQuest(){  
         if(quest.length===0){
             const atividade = await api.post('areafiltrada', {area});
-            setQuest(atividade.data)                      
-        }
+            setQuest(atividade.data)                
+        }        
+           
+            
+        
     }
     async function getEmployee(){  
         if(employees.length===0){
@@ -176,14 +213,14 @@ export default function Response(){
                         <Text style={styles.title}>Atividades</Text>
                         <FlatList                        
                         data={quest}
-                        extraData={checked}                                    
+                        extraData={isSelected}                                    
                         keyExtractor = {quest => String(quest.description)}                        
                         showsVerticalScrollIndicator = {false}                        
-                        renderItem ={({item: quest}, index)=>(
+                        renderItem ={({item: quest, index} )=>(
                             <View style={styles.quest}>
                                 <Text>   {quest.description}</Text>                                
                                 <CheckBox
-                                    value={false}
+                                    value={isSelected[index]}
                                     onChange={()=>handleOnChange(quest)} //index tá dando undefined                             
                                 />  
                                 <TextInput
@@ -226,7 +263,7 @@ export default function Response(){
                                                                                                                                                  
                         <View style={styles.input}>
                             <Button 
-                                onPress = {()=>alert('RDC enviado para o banco de dados')}                                          
+                                onPress = {()=>faztudo()}                                          
                                 title = "Enviar"
                                 type = {"clear"}
                                 iconRight = {true}
