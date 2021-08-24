@@ -77,7 +77,7 @@ export default function Atividade(){
                         
                     }catch (err){
                         const erro = err.response.data
-                        alert(err.message)
+                        alert(erro)
                     }
                 }
             }

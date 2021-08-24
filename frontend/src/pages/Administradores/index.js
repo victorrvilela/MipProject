@@ -82,7 +82,7 @@ export default function Adm(){
                         
                     }catch (err){
                         const erro = err.response.data
-                        alert(err.message)
+                        alert(erro)
                     }
                 }
             }

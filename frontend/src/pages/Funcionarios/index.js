@@ -93,7 +93,7 @@ export default function Funcionario(){
                         
                     }catch (err){
                         const erro = err.response.data
-                        alert(err.message)
+                        alert(erro)
                     }
                 }
             }

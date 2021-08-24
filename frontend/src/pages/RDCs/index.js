@@ -22,7 +22,7 @@ export default function RDC(){
     const [updateId, setId] = useState('');
     const[Leaders, SetLeaders] = useState([]);
     
-    useEffect(()=>handlePopulate(), []);
+    useEffect(()=>handlePopulate());
 
    
 
@@ -101,7 +101,7 @@ export default function RDC(){
                         
                     }catch (err){
                         const erro = err.response.data
-                        alert(err.message)
+                        alert(erro)
                     }
                 }
             
@@ -216,17 +216,17 @@ export default function RDC(){
                                     <input className="imput" 
                                         placeholder="Digite a área do RDC"
                                         value={area2}
-                                        onChange={e => setArea(e.target.value)}
+                                        onChange={e => setArea2(e.target.value)}
                                     />
                                     <input className="imput" 
                                         placeholder="Digite o código do RDC"
                                         value={cod2}
-                                        onChange={e => setCod(e.target.value)}
+                                        onChange={e => setCod2(e.target.value)}
                                     />
                                     <input className="imput" 
                                         placeholder="Digite a obra do RDC"
                                         value={obra2}
-                                        onChange={e => setObra(e.target.value)}
+                                        onChange={e => setObra2(e.target.value)}
                                     />
                                     <label>Líder:
                                         <select name="Lider" id="lider" onChange={e => setName_leader2(e.target.value)} >

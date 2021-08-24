@@ -9,12 +9,8 @@ import MIPlogo from '../../assets/logoMIP.png'
 
 export default function List(){
     const AdmName = localStorage.getItem('AdmName');
-
     const history = useHistory();
-    const [name, setName] = useState('');
     const [name_leader, setName_leader] = useState('');    
-    const [cod, setCod] = useState('');
-    const [occupation, setOcuppacion] = useState('');
 
     useEffect(() => {
         api.get('http://localhost:3333/leaders').then(response => {
