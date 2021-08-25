@@ -4,11 +4,7 @@ module.exports = {
     async index (request,response) {
         const [count] = await connection('rdcs').count();
         response.header('X-Total-Count', count['count(*)']);
-
         const rdc = await connection('rdcs').select('*');
-
-        
-       
         return response.json(rdc);        
       },
 

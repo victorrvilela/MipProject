@@ -12,6 +12,7 @@ const AreaController = require('./controllers/AreaController');
 const LoginController = require('./controllers/LoginController');
 const LoginControllerLeader = require('./controllers/LoginControllerLeader');
 const RdcResponseController = require('./controllers/RdcResponseController');
+const RdcResponse = require('./controllers/RdcResponse');
 
 const routes = express.Router();
 
@@ -39,6 +40,8 @@ routes.get('/rdcs',RdcController.index);
 routes.post('/rdcs',RdcController.create);
 routes.delete('/rdcs/:id',RdcController.delete);
 routes.put('/rdcs/:id',RdcController.update);
+
+routes.get('/rdcsresponse',RdcResponse.index);
 
 routes.get('/response',RdcResponseController.index);
 routes.post('/response',RdcResponseController.create);

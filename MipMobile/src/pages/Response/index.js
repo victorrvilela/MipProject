@@ -10,44 +10,211 @@ import styles from './styles';
 
 
  ///////////////////////comentários//////////////////////////////
-
+//
+//fazer DATA receber os dados corretamente
+//já está feito, falta ajusta data -- enviar para backend
+//colocar tudo online{backend, frontend, criar apk}
+//ser feliz
+//tratar para máximo de 6 atividades
+//tratar para máximo de 15 funcionários
+///////////////////////////////////////////////////////////////////
 export default function Response(){
 
     useEffect(()=>{
+        getRdc();  
         getData();                              
         getArea();
         getQuest();
-        getEmployee();        
+        getObra()
+        getEmployee(); 
+             
     },employees);
-    //////////////////////////constantes///////////////////////////
 
+    //////////////////////////constantes///////////////////////////
+    
+    const [obs, setObs] = useState('');
     const [flag, setFlag] = useState(0);
+    const [flag2, setFlag2] = useState(0);
+    const [flag3, setFlag3] = useState(0);
     const [leader, setLeader] = useState('');
-    const [area, setArea] = useState('');       
-    const [chuva_selected, setchuva_Selected] = useState('');
-    const [redalert_selected, setredalert_Selected] = useState('');       
-    const [quest, setQuest] = useState([]);   
-    const [employees, setEmployees] = useState([]);       
+    const [area, setArea] = useState('');  
+    const [obra, setObra] = useState('');       
+    const [chuva_selected, setchuva_Selected] = useState("Não houve");
+    const [redalert_selected, setredalert_Selected] = useState("Não houve");       
+    const [quest, setQuest] = useState([]); 
+    const [rdc,setRdc] = useState([]);  
+    const [employees, setEmployees] = useState([]);  
+    const [responseQuest, setResponse] = useState([])     
     const options = ["Manhã ", "Tarde ", "Não houve "];
     const [isSelected, setSelection]  = useState(
         new Array(50).fill(false)
-      );
+    );
+    const [atividadeText, setAtividadeText] = useState(
+        new Array(50).fill('')
+    );
+    const [funcionarioText, setFuncionarioText] = useState(
+        new Array(50).fill('0')
+    );
+    const [data, setData]= useState(
+        {            
+            "area": "civil",
+            "cod": 2,
+            "obra": "Ouro branco",
+            "name_leader": "Julio Cezar Coelho",         
+            "rain": "Manhâ",
+            "redalert": "Manhâ",
+            "area_activity1": "civil",
+            "cod_activity1": 1245,
+            "description_activity1": "montagem de forma",
+            "report1": "descrição atividade",
+            "area_activity2": null,
+            "cod_activity2": null,
+            "description_activity2": null,
+            "report2": null,
+            "area_activity3": null,
+            "cod_activity3": null,
+            "description_activity3": null,
+            "report3": null,
+            "area_activity4": null,
+            "cod_activity4": null,
+            "description_activity4": null,
+            "report4": null,
+            "area_activity5": null,
+            "cod_activity5": null,
+            "description_activity5": null,
+            "report5": null,
+            "area_activity6": null,
+            "cod_activity6": null,
+            "description_activity6": null,
+            "report6": null,
+            "name_employee1": "jose",
+            "cod_employee1": 54321,
+            "occupation_employee1": "pedreiro",
+            "hr_1_ativ": 10,
+            "name_employee2": null,
+            "cod_employee2": null,
+            "occupation_employee2": null,
+            "hr_2_ativ": null,
+            "name_employee3": null,
+            "cod_employee3": null,
+            "occupation_employee3": null,
+            "hr_3_ativ": null,
+            "name_employee4": null,
+            "cod_employee4": null,
+            "occupation_employee4": null,
+            "hr_4_ativ": null,
+            "name_employee5": null,
+            "cod_employee5": null,
+            "occupation_employee5": null,
+            "hr_5_ativ": null,
+            "name_employee6": null,
+            "cod_employee6": null,
+            "occupation_employee6": null,
+            "hr_6_ativ": null,
+            "name_employee7": null,
+            "cod_employee7": null,
+            "occupation_employee7": null,
+            "hr_7_ativ": null,
+            "name_employee8": null,
+            "cod_employee8": null,
+            "occupation_employee8": null,
+            "hr_8_ativ": null,
+            "name_employee9": null,
+            "cod_employee9": null,
+            "occupation_employee9": null,
+            "hr_9_ativ": null,
+            "name_employee10": null,
+            "cod_employee10": null,
+            "occupation_employee10": null,
+            "hr_10_ativ": null,
+            "name_employee11": null,
+            "cod_employee11": null,
+            "occupation_employee11": null,
+            "hr_11_ativ": null,
+            "name_employee12": null,
+            "cod_employee12": null,
+            "occupation_employee12": null,
+            "hr_12_ativ": null,
+            "name_employee13": null,
+            "cod_employee13": null,
+            "occupation_employee13": null,
+            "hr_13_ativ": null,
+            "name_employee14": null,
+            "cod_employee14": null,
+            "occupation_employee14": null,
+            "hr_14_ativ": null,
+            "name_employee15": null,
+            "cod_employee15": null,
+            "occupation_employee15": null,
+            "hr_15_ativ": null,
+            "obs": "observação final do RDC"
+          }
+    )
     
     //////////////////////////funções///////////////////////////
 
-    function faztudo(){
-        
-      // 
-       console.log(isSelected)
-       
-     }
-    
-     
+    async function faztudo(){
+        setData({
+            area: chuva_selected
+        })
+        console.log(data)
+
+        if(responseQuest.length ===0){
+            alert("Você não marcou nenhuma atividade")
+        }else if(responseQuest.length > 6){
+            alert("O numero máximo de atividades selecionadas é 6")
+        }else{
+            alert("enviou BD")
+            /*console.log(chuva_selected)
+            console.log(redalert_selected)
+            console.log(responseQuest)              
+            console.log(employees)   
+            console.log(rdc)       
+            console.log(atividadeText);
+            console.log(funcionarioText);
+            console.log(obs)
+            try {
+                await (await api.post('response', data, {
+                    headers:{
+                        authorization : leader
+                        }
+                    }   
+                ));
+                                
+            }catch (err){
+                alert('erro no cadastro, tente novamente!')
+            }*/
+        }          
+    }
+
     async function handleOnChange (idx){                
         const checked = isSelected.map((item, index) =>
-        index === quest.findIndex(quest => idx.description === quest.description) ? !item : item
+            index === quest.findIndex(quest => idx.description === quest.description) ? !item : item
+            );
+        setSelection(checked);  
+       
+        const questResponse = quest.map((item, index) =>
+            checked[index] === false ? '' : item
+            );
+       
+        const questfilter = questResponse.filter(function(i){return i})    
+        setResponse(questfilter)
+    }
+
+    async function onChangeAtividade(text, idx){        
+        const atividadeResponse = atividadeText.map((item, index) => 
+        index === idx ? text : item
         );
-        setSelection(checked);           
+        setAtividadeText(atividadeResponse);                               
+    }
+     
+    async function onChangeFuncionario(text, idx){          
+        const funcionarioResponse = funcionarioText.map((item, index) => 
+        index === idx ? text : item
+        );
+        
+        console.log(funcionarioResponse);
+        setFuncionarioText(funcionarioResponse);                               
     }
           
     async function getData(){        
@@ -82,7 +249,10 @@ export default function Response(){
             setSelection(
                 new Array(quest.length).fill(false)
               );
-              setFlag(1);
+            setAtividadeText(
+                new Array(quest.length).fill('')
+              );            
+            setFlag(1);
         }                                       
     }
     
@@ -93,7 +263,33 @@ export default function Response(){
                     leader : leader
                     }
             }).then(response => {setEmployees(response.data);})                         
-        }                    
+        }else if(employees.length > 15 && flag3 === 0){
+            alert("Limite máximo é de 15 funcionarios para cada lider nesta versão, você será redirecionado à página de login! Entre em contato com o administrador do sistema informando o erro")
+            navigateToLogin();
+            setFlag3(1);
+        }  
+        else if(flag2===0){
+            setFuncionarioText(
+                new Array(employees.length).fill('0')
+              );                    
+            setFlag2(1);
+        }                 
+    }
+
+    async function getRdc(){  
+        if(rdc.length === 0){
+            await api.get('rdcsresponse',{
+                headers:{
+                    leader : leader
+                    }
+            }).then(response => {setRdc(response.data);}) 
+                                    
+        }              
+    }
+    async function getObra(){
+        if(obra === '' && rdc.length !== 0){
+            setObra(rdc[0].obra)
+        }         
     }
     
     const logout = async () =>{
@@ -111,8 +307,7 @@ export default function Response(){
 
     
 
-    return (
-        
+    return (        
         <View style={styles.container}>
             <View style={styles.header} >                        
                         <View style={styles.wellcome}>                                                    
@@ -130,7 +325,8 @@ export default function Response(){
                                 />
                             </View>   
                             <View>
-                                <Text style={styles.title}>Bem-vindo(a) {leader} </Text> 
+                                <Text style={styles.title}>Bem-vindo(a) {leader} </Text>
+                                <Text style={styles.title}>Obra: {obra} </Text>
                             </View>                           
                         </View>              
                         <View >
@@ -147,17 +343,17 @@ export default function Response(){
                         <Text style={styles.title}>Alertas</Text>           
                         <View style={styles.quest}>
                             <Text style={styles.title}>Chuva</Text> 
-                            <SelectPicker 
+                            <SelectPicker    
                                 placeholder={"clique para responder"}
                                 placeholderStyle={{color:"black"}}
-                                doneButtonText={"escolhido"}
+                                doneButtonText={"escolhido"}                                
                                 onValueChange={(value) => {                                    
                                     setchuva_Selected(value);
                                 }}
                                 chuva_selected={chuva_selected}
                             >                                
                                 {Object.values(options).map((val,index) => (
-                                    <SelectPicker.Item label={val} value={val} key={val} /> //exclui a key, pode ser que precise voltar
+                                    <SelectPicker.Item label={val} value={val} key={val} />
                                 ))}
                             </SelectPicker>
                         </View>
@@ -168,7 +364,7 @@ export default function Response(){
                                 placeholderStyle={{color:"black"}}
                                 doneButtonText={"escolhido"}
                                 onValueChange={(value) => {
-                                    setredalert_Selected(value);
+                                setredalert_Selected(value);
                                 }}
                                 redalert_selected={redalert_selected}
                             >                                
@@ -193,7 +389,9 @@ export default function Response(){
                                 <Text>   {quest.description}</Text>
                                 <TextInput
                                     style={styles.input}                                                                
-                                    placeholder="Descrição da atividade"                                
+                                    placeholder="Descrição da atividade"
+                                    onChangeText={text=> onChangeAtividade(text, index)}
+                                    value={atividadeText[index]}                                                                                                     
                                 />                                                
                             </View>
                                                         
@@ -205,15 +403,19 @@ export default function Response(){
                         data={employees}                                                          
                         keyExtractor = {employees => String(employees.name)}                                                
                         showsVerticalScrollIndicator = {false}                        
-                        renderItem ={({item: employees}, index)=>(
+                        renderItem ={({item: employees, index})=>(
                             <View style={styles.quest}>
                                 <Text>Nome: {employees.name}</Text>
                                 <Text>Função: {employees.occupation}</Text>
                                 <TextInput
+                                defaultValue = {'0'}
                                 style={styles.input}                                                                
                                 placeholder="Digite as horas trabalhadas pelo funcionário"
-                                keyboardType="numeric"
-                            />                                                                                                                 
+                                keyboardType="numeric"  
+                                onChangeText={text=> onChangeFuncionario(text, index)}
+                                value={funcionarioText[index]}                              
+                            />      
+                                <Text>Digite acima as horas trabalhadas no dia.</Text>                                                                                                           
                             </View>                            
                         )}
                         
@@ -224,6 +426,8 @@ export default function Response(){
                             <TextInput
                                 style={styles.input}                                                                
                                 placeholder="Utilize caso haja alguma observação a ser feita"                                
+                                onChangeText={obs => setObs(obs)}
+                                defaultValue={obs}
                             />
                         </View>            
 
