@@ -9,7 +9,6 @@ module.exports = {
       },
 
     async create (request, response){
-        
         const { 
             area,
             cod,
@@ -19,16 +18,23 @@ module.exports = {
             } = request.body;
         const name_adm = request.headers.authorization;
 
-        const [id] = await connection('rdcs').insert({
-            area,
-            cod,
-            obra,
-            name_adm,
-            name_leader,            
-           
-        });
 
-        return response.json({id});
+        const rdcUnico = await connection('rdcs').where('name_leader', name_leader).first()
+        
+        if(!rdcUnico){
+            const [id] = await connection('rdcs').insert({
+                area,
+                cod,
+                obra,
+                name_adm,
+                name_leader,            
+            
+            });
+
+            return response.json({id});
+        }else{
+            return response.status(400).json({error: 'Líder já possui RDC cadastrado!'})
+        }
     },
 
     async update (request, response){
@@ -40,19 +46,27 @@ module.exports = {
         
 
         const name_adm = request.headers.authorization;
-        try{
-            await connection('rdcs').update({
-                area,
-                cod,
-                obra,
-                name_adm,
-                name_leader,                           
-            });
+        
+        const rdcUnico = await connection('rdcs').where('id', id).first()
+       
+        
+        if(rdcUnico.name_leader === name_leader){            
+            try{
+                await connection('rdcs').where('id', id).update({
+                    area,
+                    cod,
+                    obra,
+                    name_adm,
+                    name_leader,                           
+                });
 
-            return response.json({sucess: 'RDC atualizado com sucesso'});
-        }catch{
-            return response.status(400).json({error: 'Erro ao atualizar RDC'})
-        }
+                return response.json({sucess: 'RDC atualizado com sucesso'});
+            }catch{
+                return response.status(400).json({error: 'Erro ao atualizar RDC'})
+            }
+        } else{           
+            return response.status(400).json({error: 'Erro'})
+        }      
     },
 
     async delete(request, response){

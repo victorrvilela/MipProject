@@ -21,17 +21,28 @@ export default function Login(){
             if(response){                                
                 try {
                     const jsonValue = JSON.stringify(response.data.name)
-                    await AsyncStorage.setItem('LeaderName', jsonValue)                 
-                  } catch (e) {
-                    alert('erro ao logar');
-                  }  
-                                                                           
-                navigateToResponse();
+                    await AsyncStorage.setItem('LeaderName', jsonValue)                      
+                    if(jsonValue){
+                        try{
+                            const rdc = await api.get('rdcsresponse',{
+                                headers:{
+                                    leader: response.data.name
+                                    }
+                                })                            
+                        navigateToResponse();
+                        }catch{
+                            alert('Você não possui RDC cadastrado em seu nome. Procure o administrador do sistema');
+                        }                                                                  
+                    }
+                } catch (e) {
+                    alert('erro ao logar2');
+                }
+                                       
             }else{
-                alert('erro ao logar');
+                alert('erro ao logar3');
             }
         }catch(err){
-            alert('erro ao logar');
+            alert('erro ao logar4');
         }
     }
    
@@ -52,16 +63,14 @@ export default function Login(){
                 style={styles.container}
                 keyboardVerticalOffset={150}
             >
-                <ScrollView style ={{width: "100%"}} showsVerticalScrollIndicator ={false}>
-                  
+                <ScrollView style ={{width: "100%"}} showsVerticalScrollIndicator ={false}>                  
                     <View style={styles.header} >
-                        <View >
+                        <View>
                             <Image style={styles.image} source={logoMip}/>                
                         </View>
                         <View style={styles.wellcome}>
                             <Text style={styles.title}>Bem-vindo(a) líder</Text>
-                            <Text></Text>
-                            <Text style={styles.title}>Faça login para responder seu RDC</Text>
+                      
                         </View>                
                     </View>
                     <View style={styles.input}>
@@ -95,6 +104,9 @@ export default function Login(){
                     </View>
                     
                 </ScrollView>
+                <View >
+                    <Text> developed by Victor Vilela</Text>
+                </View>
             </KeyboardAvoidingView>
         </View>
     )

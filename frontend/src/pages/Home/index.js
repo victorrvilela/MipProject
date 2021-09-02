@@ -19,11 +19,15 @@ export default function Casa(){
       <div className="Home-container">
           <section className="Cabeçalho">
             <section className="Texto-cabeçalho">
-                <h1>Relatório Diário de Campo</h1>
+                <div>
+                    <h1>Relatório Diário de Campo</h1>
+                </div>
+                <div className="unidade">
+                    <h1>Unidade Congonhas do campo</h1>
+                </div>                
             </section> 
-            <section className="Logo">
+            <section className="logo">                
                 
-                <h1>Unidade Congonhas do campo</h1>
                 <img src={MIPlogo} alt ="MIP Engenharia"/>
             </section>
           </section>

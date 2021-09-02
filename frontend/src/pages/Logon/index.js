@@ -31,7 +31,7 @@ export default function Logon(){
     return(
        <div className="logon-container">
            <div className="logon-color">
-                 <section className="img">
+                <section className="img">
                     <img src={MIPlogo} alt ="MIP Engenharia"/>
                 </section>
                 <section className="form">
@@ -53,12 +53,14 @@ export default function Logon(){
                                 
                                 onChange={e => setPassword(e.target.value)}
                             />
-                            <button className="button" type="submit">Entrar</button>
+                            <button className="button-logon" type="submit">Entrar</button>
                         </section>
                     </form>
-                </section>
-                
+                </section>                
             </div>
+            <footer>
+                developed by Victor Vilela
+            </footer>            
        </div>
        
     );

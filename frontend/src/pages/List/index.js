@@ -45,26 +45,27 @@ export default function List(){
     }
 
     return(      
-      <div className="Funcionario-container">
+      <div className="Lista-container">
           <section className="Cabeçalho">
             <section className="Texto-cabeçalho">
-
-                <h1>Relatório Diário de Campo</h1>
+                <div>
+                    <h1>Relatório Diário de Campo</h1>
+                </div>
+                <div className="unidade">
+                    <h1>Unidade Congonhas do campo</h1>
+                </div>                
             </section> 
-            <section className="Logo">
-                
-                <h1>Unidade Congonhas do campo</h1>
+            <section className="logo">                                
                 <img src={MIPlogo} alt ="MIP Engenharia"/>
             </section>
           </section>
-
           <section className="Corpo">              
              <section className ="Topo">
                  <section className="Wellcome" >
                     <h1>Bem vindo(a), {AdmName}</h1>
                  </section>
                  <section className="Titulo">
-                    <h1>Gerenciamento de Funcionarios</h1>
+                    <h1>Listagem de Funcionarios por líder</h1>
                  </section>
                  <section className="Logout">
                  <Link to="/Home" className="button-logout"> <FiArrowLeft size={25}></FiArrowLeft> Voltar </Link>
@@ -85,7 +86,7 @@ export default function List(){
                                     </label>                                      
                                 </section >
                                 <section className="campos">
-                                    <submit  onClick={()=>handeleList()}  className="button-card" > <FiCheck size={25} color="green"/></submit>                                                                                                          
+                                    <submit onClick={()=>handeleList()}  className="button-list" > CLique aqui para carregar os funcionários<FiCheck size={25} color="green"/></submit>                                                                                                          
                                 </section>
                             </form>
                         </section>                                  
@@ -108,11 +109,7 @@ export default function List(){
                             </li>
                         ))}
                         </ul>
-                    </section>
-                    
-                   
-                    
-                               
+                    </section>                                                                                          
                 </div>               
              </div>           
           </section>

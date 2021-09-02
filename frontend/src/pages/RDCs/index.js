@@ -99,9 +99,8 @@ export default function RDC(){
                         alert('RDC atualizado com sucesso!')
                         handeleList();
                         
-                    }catch (err){
-                        const erro = err.response.data
-                        alert(erro)
+                    }catch (err){                                                                    
+                        alert( 'Líder já possui RDC cadastrado!')
                     }
                 }
             
@@ -123,16 +122,18 @@ export default function RDC(){
       <div className="Rdc-container">
           <section className="Cabeçalho">
             <section className="Texto-cabeçalho">
-
-                <h1>Relatório Diário de Campo</h1>
+                <div>
+                    <h1>Relatório Diário de Campo</h1>
+                </div>
+                <div className="unidade">
+                    <h1>Unidade Congonhas do campo</h1>
+                </div>                
             </section> 
-            <section className="Logo">
+            <section className="logo">                
                 
-                <h1>Unidade Congonhas do campo</h1>
                 <img src={MIPlogo} alt ="MIP Engenharia"/>
             </section>
           </section>
-
           <section className="Corpo">              
              <section className ="Topo">
                  <section className="Wellcome" >
@@ -236,7 +237,7 @@ export default function RDC(){
                                     </label>                                                                                 
                                 </section>
                                 <section >
-                                <submit onClick={handleUpdate} className="button-card" > <FiEdit size={25} color="green"/>Id:{updateId}</submit>    
+                                <submit onClick={handleUpdate} className="button-card" > <FiEdit size={25} color="green"/>CLique para editar Id:{updateId}</submit>    
                                 </section>
                             </form>
                         </section>                                                                   

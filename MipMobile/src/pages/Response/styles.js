@@ -12,20 +12,24 @@ export default StyleSheet.create({
     },
 
     image:{        
-        width:50,
-        height:50,
+        width:300,
+        height:100,
         borderRadius:10,
+        resizeMode: "center",  
+        backgroundColor:'white',
     },
 
     header:{
         flexDirection: 'row',
         alignItems:'center',
         justifyContent: 'space-around',
-        width:'100%'
+        width:'100%',
+        marginTop:10
     },
 
     wellcome:{
         width:'80%',
+        flexDirection:'row',
     },
 
     quest:{
@@ -40,13 +44,16 @@ export default StyleSheet.create({
     title:{
         fontWeight:'bold',
     },
+    title2:{
+        fontWeight:'bold',
+        marginTop:15,
+    },
     
     form:{
         paddingTop:10,            
     },
     
     body:{
-        paddingTop:10,
         alignItems:'center',
     },
     

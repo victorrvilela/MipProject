@@ -12,10 +12,12 @@ export default StyleSheet.create({
     },
 
     image:{        
-        width:150,
+        width:350,
         height:150,
-        borderRadius:10,
+        backgroundColor:'white',
+        resizeMode: "center",        
     },
+
     title:{
         fontSize:20,
         alignItems: 'center',
@@ -23,7 +25,8 @@ export default StyleSheet.create({
 
     header:{
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'flex-start',
+        
     },
     wellcome:{
         alignItems: 'center',  
@@ -32,10 +35,11 @@ export default StyleSheet.create({
     },
 
     input:{
+        alignItems: 'center',
         backgroundColor: '#FFFFFF',
-        width:300,
+        width:'100%',
         borderRadius:20,
-        marginTop:30,
+        marginTop:40,
     },
     
 

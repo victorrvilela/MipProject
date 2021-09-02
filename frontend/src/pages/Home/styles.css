@@ -2,7 +2,7 @@
     background: #FA8415;
     width: 100%;
     max-width: 1120px;
-    height: 100%;
+  
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -54,12 +54,10 @@
     border: 0;
     border-radius: 10px;
     font-weight: 700;
-    display: inline-block;
     text-align: center;
     text-decoration: none;
     font-size: 18px;
     line-height: 60px;
 }
-
 
 

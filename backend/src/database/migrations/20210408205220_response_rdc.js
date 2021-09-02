@@ -3,7 +3,7 @@ exports.up = function(knex) {
       table.increments('id');
       table.string('area').notNullable();
       table.integer('cod').notNullable();
-      table.integer('obra').notNullable();
+      table.string('obra').notNullable();
   
       table.string('name_leader').notNullable();
       table.foreign('name_leader').references('name').inTable('leaders');

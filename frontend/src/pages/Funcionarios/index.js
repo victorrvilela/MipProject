@@ -114,18 +114,20 @@ export default function Funcionario(){
 
     return(      
       <div className="Funcionario-container">
-          <section className="Cabeçalho">
+           <section className="Cabeçalho">
             <section className="Texto-cabeçalho">
-
-                <h1>Relatório Diário de Campo</h1>
+                <div>
+                    <h1>Relatório Diário de Campo</h1>
+                </div>
+                <div className="unidade">
+                    <h1>Unidade Congonhas do campo</h1>
+                </div>                
             </section> 
-            <section className="Logo">
+            <section className="logo">                
                 
-                <h1>Unidade Congonhas do campo</h1>
                 <img src={MIPlogo} alt ="MIP Engenharia"/>
             </section>
           </section>
-
           <section className="Corpo">              
              <section className ="Topo">
                  <section className="Wellcome" >
@@ -229,7 +231,7 @@ export default function Funcionario(){
                                     </label>                                                                                                              
                                 </section>
                                 <section >
-                                 <submit onClick={handleUpdate} className="button-card" > <FiEdit size={25} color="green"/>Id:{updateId}</submit>    
+                                 <submit onClick={handleUpdate} className="button-card" > <FiEdit size={25} color="green"/>Clique para editar Id:{updateId}</submit>    
                                 </section> 
                             </form>
                         </section>                                  

@@ -8,25 +8,28 @@ img{
 
 .logon-container{
     width: 100%;
-    max-width: 1120px;
-    height: 100 vh;
+    max-width: 1120px;    
     margin: 0 auto;
     margin-left: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #fa8415;  
-
+    height: 200vh;
 }
 .img{
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
 }
 .logon-color{
     width:50%;
     max-width: 1120px;
-    height: 100 vh;
+    height: 100vh;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -53,7 +56,7 @@ img{
     font-size:500;
 }
 
-.button{
+.button-logon{
     background-color:#f3f3f3 ; 
     color: rgb(0, 0, 0);
     margin-top: 20px;
@@ -62,14 +65,19 @@ img{
     border: 0;
     border-radius: 10px;
     font-weight: 700;
-    display: inline-block;
+    display: flex;
     text-align: center;
     text-decoration: none;
     font-size: 18px;
     line-height: 60px;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+
 }
 
-.button:hover{
+
+.button-logon:hover{
     filter: brightness(80%);
 }
 
@@ -80,7 +88,7 @@ img{
     .logon-container{       
         width: 100%;
         max-width: 1120px;
-        height: 100 vh;
+        height: 100vh;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -94,9 +102,5 @@ img{
 
     .logon-container section.form{
         order: 2;
-    }
-   
-
-
-    
+    }    
   }
